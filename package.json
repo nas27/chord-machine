@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@tonaljs/chord": "^4.10.0",
+    "@tonaljs/tonal": "^4.10.0",
+    "parcel-bundler": "^1.12.5",
+    "webmidi": "^3.1.4"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "name": "ear-trainer",
+  "description": "Web MIDI ear trainer for music intervals",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nas27/ear-trainer.git"
+  },
+  "author": "Nastasia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nas27/ear-trainer/issues"
+  },
+  "homepage": "https://github.com/nas27/ear-trainer#readme"
+}
