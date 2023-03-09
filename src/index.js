@@ -1,5 +1,5 @@
-import { note, interval } from "@tonaljs/tonal";
-import { chord }    from "@tonaljs/chord";
+//import { note, interval, transpose } from "@tonaljs/tonal";
+//import { chord }    from "@tonaljs/chord";
 
 //console.log(note("Ab4"));
 
@@ -7,4 +7,5 @@ import { chord }    from "@tonaljs/chord";
 
 //console.log(myInterval);
 
-console.log(chord('Ebmaj7'));
+//console.log(chord('Ebmaj7'));
+
