@@ -8,10 +8,13 @@ const startNoteSelector = document.querySelector('#start-note');
 
 const octaveSelector = document.querySelector('#octave');
 
-const buttons = document.querySelector('.buttons'); 
+const buttons = document.querySelector('.buttons');             
+
+const intervalsInChord = document.querySelector('.intervals-in-chord');
 
 let selectedStartNote;
 let selectedOctave;
+let selectedChord;
 
 const app = {
     initialize(){
@@ -62,7 +65,25 @@ const app = {
             selectedOctave = octaveSelector.value;
             console.log(selectedOctave);
         });
+
+        buttons.addEventListener('click', (event) =>{
+            if(event.target.classList.contains('buttons')){
+                //nothing happens if we click inside div but not on a button specifically
+                return;
+            }
+            selectedChord = event.target.innerText;
+            this.displayChordInfo(selectedChord);   
+        });
     },
+
+    displayChordInfo(selectedChord){
+        let chordIntervals = chord(selectedChord).intervals;
+        //format with hyphen instead of csv from array
+        intervalsInChord.innerText = chordIntervals.join(' - ');
+        console.log(chord(selectedChord));
+    },
+
+
     createElement(elementName, content) {
         let element = document.createElement(elementName);
         element.innerHTML = content;
