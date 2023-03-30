@@ -1,5 +1,9 @@
 import { chord } from "@tonaljs/chord";
+import { transpose } from "@tonaljs/tonal";
 import { chordType, entries } from "@tonaljs/chord-dictionary";
+ 
+
+console.log(transpose('A3','P5'));
 
 //array for the roots of chords
 const startNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb','B'];
@@ -12,8 +16,8 @@ const buttons = document.querySelector('.buttons');
 
 const intervalsInChord = document.querySelector('.intervals-in-chord');
 
-let selectedStartNote;
-let selectedOctave;
+let selectedStartNote = 'C';
+let selectedOctave = '1';
 let selectedChord;
 
 const app = {
@@ -80,7 +84,13 @@ const app = {
         let chordIntervals = chord(selectedChord).intervals;
         //format with hyphen instead of csv from array
         intervalsInChord.innerText = chordIntervals.join(' - ');
-        console.log(chord(selectedChord));
+
+        const startingNoteWithOctave = selectedStartNote + selectedOctave;
+        let chordNotes = chordIntervals.map(val => {
+            return transpose(startingNoteWithOctave, val);
+        });
+        console.log(chordNotes);
+        console.log(startingNoteWithOctave);
     },
 
 
