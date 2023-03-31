@@ -1,7 +1,8 @@
 import { chord } from "@tonaljs/chord";
 import { transpose } from "@tonaljs/tonal";
 import { chordType, entries } from "@tonaljs/chord-dictionary";
- 
+
+//start video #9 for howler lib
 
 console.log(transpose('A3','P5'));
 
@@ -15,6 +16,8 @@ const octaveSelector = document.querySelector('#octave');
 const buttons = document.querySelector('.buttons');             
 
 const intervalsInChord = document.querySelector('.intervals-in-chord');
+
+const notesInChord = document.querySelector('.notes-in-chord');
 
 let selectedStartNote = 'C';
 let selectedOctave = '1';
@@ -89,6 +92,9 @@ const app = {
         let chordNotes = chordIntervals.map(val => {
             return transpose(startingNoteWithOctave, val);
         });
+
+        notesInChord.innerText = chordNotes.join(' - ');
+
         console.log(chordNotes);
         console.log(startingNoteWithOctave);
     },
