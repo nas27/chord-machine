@@ -1,10 +1,22 @@
 import { chord } from "@tonaljs/chord";
 import { transpose } from "@tonaljs/tonal";
 import { chordType, entries } from "@tonaljs/chord-dictionary";
+import { Howler, howl } from "howler";
 
 //start video #9 for howler lib
 
 console.log(transpose('A3','P5'));
+
+const sound = new Howl({
+    src: ['assets/pianosprite.mp3'],
+    onload() {
+        console.log('sound file loaded');
+        soundEngine.initialize();
+    },
+    onloaderror(e, msg) {
+        console.log('error', e, msg);
+    }
+});
 
 //array for the roots of chords
 const startNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb','B'];
@@ -104,6 +116,12 @@ const app = {
         let element = document.createElement(elementName);
         element.innerHTML = content;
         return element;
+    }
+}
+
+const soundEngine = {
+    initialize() {
+        console.log('it works');
     }
 }
 

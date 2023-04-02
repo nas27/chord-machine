@@ -3,6 +3,7 @@
     "@tonaljs/chord": "^4.10.0",
     "@tonaljs/chord-dictionary": "^4.8.0",
     "@tonaljs/tonal": "^4.10.0",
+    "howler": "^2.2.3",
     "parcel-bundler": "^1.12.5",
     "webmidi": "^3.1.4"
   },
