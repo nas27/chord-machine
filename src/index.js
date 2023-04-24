@@ -1,14 +1,14 @@
 import { chord } from "@tonaljs/chord";
-import { transpose } from "@tonaljs/tonal";
-import { chordType, entries } from "@tonaljs/chord-dictionary";
+import { note, transpose } from "@tonaljs/tonal";
+import { chordType, ChordType, entries } from "@tonaljs/chord-dictionary";
 import { Howler, howl } from "howler";
 
-//start video #9 for howler lib
+//start video #10 for howler lib
 
 console.log(transpose('A3','P5'));
 
 const sound = new Howl({
-    src: ['assets/pianosprite.mp3'],
+    src: ['./assets/pianosprite.mp3'],
     onload() {
         console.log('sound file loaded');
         soundEngine.initialize();
@@ -62,6 +62,7 @@ const app = {
     setupButtons() {
        // const chordEntries = entries();
 
+       
         const chordNames = entries().map(entry => {
             return entry.aliases[0];
         });
@@ -91,11 +92,11 @@ const app = {
                 return;
             }
             selectedChord = event.target.innerText;
-            this.displayChordInfo(selectedChord);   
+            this.displayAndPlayChord(selectedChord);   
         });
     },
 
-    displayChordInfo(selectedChord){
+    displayAndPlayChord(selectedChord){
         let chordIntervals = chord(selectedChord).intervals;
         //format with hyphen instead of csv from array
         intervalsInChord.innerText = chordIntervals.join(' - ');
@@ -106,6 +107,7 @@ const app = {
         });
 
         notesInChord.innerText = chordNotes.join(' - ');
+        soundEngine.play(chordNotes);
 
         console.log(chordNotes);
         console.log(startingNoteWithOctave);
@@ -121,8 +123,26 @@ const app = {
 
 const soundEngine = {
     initialize() {
-        console.log('it works');
+        
+        const lengthofNote = 2400;
+        //everytime we reach it we will add it to timeindex so it goes to the next one
+        let timeIndex = 0;
+
+        //set to 24 bc midi number C set to 24
+        //96 is midi number of c7
+        for (let i = 24; i<= 96;i++){
+            sound['_sprite'][i] = [timeIndex, lengthofNote];//start and end 24,2400
+            timeIndex += lengthofNote;
+        }
+        
+    },
+    play(soundSequence) {
+        soundSequence.forEach(noteName => {
+            console.log(noteName,note(noteName).midi);
+        });
+        
     }
+
 }
 
 app.initialize();
