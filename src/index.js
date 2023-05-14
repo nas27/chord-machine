@@ -3,9 +3,26 @@ import { note, transpose } from "@tonaljs/tonal";
 import { chordType, ChordType, entries } from "@tonaljs/chord-dictionary";
 import { Howler, howl } from "howler";
 
-//start video #10 for howler lib
+//start video #11 for howler lib
 
-console.log(transpose('A3','P5'));
+//console.log(transpose('A3','P5'));
+
+//unrelated testing of get request
+fetch('https://jsonplaceholder.typicode.com/users/3') 
+    .then(response => {                            
+        return response.json();
+    })
+    .then(post => {
+             if (post.address.geo.lat < 60.00){
+                console.log('latitude less than 60');
+             }  
+                console.log(post.username);
+             
+        
+    } )
+    
+
+
 
 const sound = new Howl({
     src: ['./assets/pianosprite.mp3'],
@@ -23,7 +40,7 @@ const startNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G',
 
 const startNoteSelector = document.querySelector('#start-note');
 
-const octaveSelector = document.querySelector('#octave');
+//const octaveSelector = document.querySelector('#octave');   
 
 const buttons = document.querySelector('.buttons');             
 
@@ -32,13 +49,13 @@ const intervalsInChord = document.querySelector('.intervals-in-chord');
 const notesInChord = document.querySelector('.notes-in-chord');
 
 let selectedStartNote = 'C';
-let selectedOctave = '1';
+//let selectedOctave = '3';
 let selectedChord;
 
 const app = {
     initialize(){
         this.setupStartNotes();
-        this.setupOctaves();
+        //this.setupOctaves();
         this.setupButtons();
         this.setupEventListeners();
     }, 
@@ -51,13 +68,13 @@ const app = {
         });
     },
 
-    setupOctaves() {
-       for(let i = 1; i <= 7; i++) 
+   /* setupOctaves() {
+       for(let i = 1; i <= 4; i++) 
        {
         let octaveNumber = this.createElement('option', i);
         octaveSelector.appendChild(octaveNumber);
        }
-    },
+    },*/
 
     setupButtons() {
        // const chordEntries = entries();
@@ -81,10 +98,10 @@ const app = {
 
         })
 
-        octaveSelector.addEventListener('change', () =>{
+       /* octaveSelector.addEventListener('change', () =>{
             selectedOctave = octaveSelector.value;
             console.log(selectedOctave);
-        });
+        });*/
 
         buttons.addEventListener('click', (event) =>{
             if(event.target.classList.contains('buttons')){
@@ -101,7 +118,11 @@ const app = {
         //format with hyphen instead of csv from array
         intervalsInChord.innerText = chordIntervals.join(' - ');
 
-        const startingNoteWithOctave = selectedStartNote + selectedOctave;
+        //test without specifying the Octave as it doesn't matter
+        const startingNoteWithOctave = selectedStartNote;
+    
+    //    const startingNoteWithOctave = selectedStartNote + selectedOctave;
+
         let chordNotes = chordIntervals.map(val => {
             return transpose(startingNoteWithOctave, val);
         });
@@ -137,8 +158,16 @@ const soundEngine = {
         
     },
     play(soundSequence) {
-        soundSequence.forEach(noteName => {
+
+        const chordMidiNumbers = soundSequence.map(noteName => {
+            return noteName().midi;
+        });
+
+        sound.volume(0.75);
+
+        chordMidiNumbers.forEach(noteMidiNumber => {
             console.log(noteName,note(noteName).midi);
+            sound.play(noteMidiNumber.toString());
         });
         
     }
