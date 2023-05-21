@@ -13,6 +13,7 @@ img {
 .controls {
     display: flex;
     justify-content: center;
+    padding-bottom: 10px;
 }
 
 .controls select {
@@ -24,6 +25,15 @@ img {
     align-items: center;
     font-size: 1.5em;
     flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.notes-in-chord {
+    color: rgb(91, 89, 89);
+}
+
+.intervals-in-chord {
+    color:rgb(91, 89, 89);
 }
 
 .chord-notes p {
@@ -34,10 +44,14 @@ img {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    max-width: fit-content;
 }
 
 .buttons button {
-    flex-grow: 1;
+    /*comment this out as it would cause some buttons to be larger which signals it is more important chord
+    and could confuse the user
+    flex-grow: 1;*/
+
     min-width: 200px;
     height: 50px;
     font-size: 1em;
@@ -47,4 +61,5 @@ img {
     margin:10px;
     inline-size: 100px;
     overflow-wrap: break-word;
+    border-radius: 5px;
 }
