@@ -1,2 +1,2 @@
 # ear-trainer
-Web MIDI ear trainer for music intervals
+chord builder which specifies the notes and intervals of a given chord based on user input
